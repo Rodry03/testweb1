@@ -12,6 +12,8 @@
             align-items: center;
             height: 100vh;
             background-color: #f4f4f4;
+            overflow: hidden; /* Evita que aparezcan barras de desplazamiento */
+            position: relative;
         }
         #container {
             text-align: center;
@@ -19,6 +21,7 @@
             padding: 20px;
             border-radius: 8px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            z-index: 2; /* Asegura que el formulario esté sobre la imagen en movimiento */
         }
         input[type="text"] {
             padding: 10px;
@@ -32,10 +35,15 @@
             font-size: 18px;
             color: green;
         }
+        #moving-image {
+            position: absolute;
+            width: 100px; /* Tamaño de la imagen */
+            height: auto;
+            z-index: 1;
+        }
     </style>
 </head>
 <body>
-
 <div id="container">
     <h2>Introduce el Código</h2>
     <input type="text" id="codigo" maxlength="6" placeholder="Introduce las 6 cifras">
@@ -56,6 +64,37 @@
         }
     }
 </script>
+    <img src="pareja.jpg" id="moving-image" alt="Pareja">
+
+    <script>
+        // Script para mover la imagen y hacer que rebote en los bordes
+        const img = document.getElementById('moving-image');
+        let posX = 0;
+        let posY = 0;
+        let velX = 2; // Velocidad horizontal
+        let velY = 2; // Velocidad vertical
+        const updatePosition = () => {
+            const imgWidth = img.offsetWidth;
+            const imgHeight = img.offsetHeight;
+            const maxWidth = window.innerWidth - imgWidth;
+            const maxHeight = window.innerHeight - imgHeight;
+
+            posX += velX;
+            posY += velY;
+
+            if (posX <= 0 || posX >= maxWidth) velX *= -1;
+            if (posY <= 0 || posY >= maxHeight) velY *= -1;
+
+            img.style.left = posX + 'px';
+            img.style.top = posY + 'px';
+
+            requestAnimationFrame(updatePosition);
+        };
+
+        // Iniciar la animación
+        updatePosition();
+    </script>
+
 
 
 </body>
