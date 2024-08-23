@@ -36,13 +36,19 @@
             font-size: 18px;
             color: green;
         }
-        #moving-image {
+        .moving-image {
             position: absolute;
-            width: 200px; /* Tamaño de la imagen */
+            width: 200px; /* Tamaño de las imágenes */
             height: auto;
             z-index: 1;
+        }
+        #moving-image1 {
             left: 0;
             top: 0;
+        }
+        #moving-image2 {
+            right: 0;
+            bottom: 0;
         }
     </style>
 </head>
@@ -54,7 +60,8 @@
     <div id="message"></div>
 </div>
 
-<img src="pareja.jpg" id="moving-image" alt="Pareja">
+<img src="pareja.jpg" id="moving-image1" class="moving-image" alt="Pareja 1">
+<img src="anillos.jpg" id="moving-image2" class="moving-image" alt="Pareja 2">
 
 <script>
     function validarCodigo() {
@@ -69,33 +76,59 @@
         }
     }
 
-    // Script para mover la imagen y hacer que rebote en los bordes
-    const img = document.getElementById('moving-image');
-    let posX = 0;
-    let posY = 0;
-    let velX = 2; // Velocidad horizontal
-    let velY = 2; // Velocidad vertical
+    // Script para mover la primera imagen
+    const img1 = document.getElementById('moving-image1');
+    let posX1 = 0;
+    let posY1 = 0;
+    let velX1 = 2; // Velocidad horizontal
+    let velY1 = 2; // Velocidad vertical
 
-    const updatePosition = () => {
-        const imgWidth = img.offsetWidth;
-        const imgHeight = img.offsetHeight;
-        const maxWidth = window.innerWidth - imgWidth;
-        const maxHeight = window.innerHeight - imgHeight;
+    const updatePosition1 = () => {
+        const imgWidth1 = img1.offsetWidth;
+        const imgHeight1 = img1.offsetHeight;
+        const maxWidth1 = window.innerWidth - imgWidth1;
+        const maxHeight1 = window.innerHeight - imgHeight1;
 
-        posX += velX;
-        posY += velY;
+        posX1 += velX1;
+        posY1 += velY1;
 
-        if (posX <= 0 || posX >= maxWidth) velX *= -1;
-        if (posY <= 0 || posY >= maxHeight) velY *= -1;
+        if (posX1 <= 0 || posX1 >= maxWidth1) velX1 *= -1;
+        if (posY1 <= 0 || posY1 >= maxHeight1) velY1 *= -1;
 
-        img.style.left = posX + 'px';
-        img.style.top = posY + 'px';
+        img1.style.left = posX1 + 'px';
+        img1.style.top = posY1 + 'px';
 
-        requestAnimationFrame(updatePosition);
+        requestAnimationFrame(updatePosition1);
     };
 
-    // Iniciar la animación
-    updatePosition();
+    // Script para mover la segunda imagen
+    const img2 = document.getElementById('moving-image2');
+    let posX2 = 0;
+    let posY2 = 0;
+    let velX2 = 2; // Velocidad horizontal
+    let velY2 = 2; // Velocidad vertical
+
+    const updatePosition2 = () => {
+        const imgWidth2 = img2.offsetWidth;
+        const imgHeight2 = img2.offsetHeight;
+        const maxWidth2 = window.innerWidth - imgWidth2;
+        const maxHeight2 = window.innerHeight - imgHeight2;
+
+        posX2 += velX2;
+        posY2 += velY2;
+
+        if (posX2 <= 0 || posX2 >= maxWidth2) velX2 *= -1;
+        if (posY2 <= 0 || posY2 >= maxHeight2) velY2 *= -1;
+
+        img2.style.right = (window.innerWidth - posX2 - imgWidth2) + 'px';
+        img2.style.bottom = (window.innerHeight - posY2 - imgHeight2) + 'px';
+
+        requestAnimationFrame(updatePosition2);
+    };
+
+    // Iniciar la animación para ambas imágenes
+    updatePosition1();
+    updatePosition2();
 </script>
 
 </body>
