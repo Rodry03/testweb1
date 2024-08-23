@@ -38,24 +38,25 @@
 
 <div id="container">
     <h2>Introduce el Código</h2>
-    <input type="text" id="codigo" maxlength="6" placeholder="Introduce 6 cifras">
+    <input type="text" id="codigo" maxlength="6" placeholder="Introduce las 6 cifras">
     <button onclick="validarCodigo()">Validar</button>
     <div id="message"></div>
 </div>
 
 <script>
     function validarCodigo() {
-        const codigoCorrecto = "123456"; // Cambia este valor al código que desees
+        const codigoCorrecto = "310824"; // Cambia este valor al código que desees
         const codigoIngresado = document.getElementById("codigo").value;
         const mensaje = document.getElementById("message");
 
         if (codigoIngresado === codigoCorrecto) {
-            mensaje.textContent = "Hola";
+            window.location.href = "correcto.html"; // Redirige a correcto.html
         } else {
             mensaje.textContent = "Código incorrecto";
         }
     }
 </script>
+
 
 </body>
 </html>
