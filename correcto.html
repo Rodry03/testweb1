@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Correcto</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-size: cover;
+            background-position: center;
+            font-family: Arial, sans-serif;
+        }
+        #center-text {
+            font-size: 3em;
+            color: white;
+            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.7);
+        }
+    </style>
+</head>
+<body>
+    <div id="center-text">xxxx</div>
+
+    <script>
+        window.onload = function() {
+            alert("ENHORABUENA PAREJA");
+
+            // Cambiar el fondo y mostrar el texto después de aceptar el popup
+            document.body.style.backgroundImage = "url('ruta/de/tu/imagen.jpg')";
+            document.getElementById('center-text').style.display = 'block';
+        }
+    </script>
+</body>
+</html>
