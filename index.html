@@ -63,7 +63,25 @@
         const mensaje = document.getElementById("message");
 
         if (codigoIngresado === codigoCorrecto) {
-            window.location.href = "correcto.html"; // Redirige a correcto.html
+            // Enviar el código al servidor para notificación por correo
+            fetch('enviar_correo.php', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded',
+                },
+                body: 'codigo=' + encodeURIComponent(codigoIngresado)
+            })
+            .then(response => response.text())
+            .then(data => {
+                if (data === "success") {
+                    window.location.href = "correcto.html"; // Redirige a correcto.html
+                } else {
+                    mensaje.textContent = "No se pudo enviar el correo, pero el código es correcto.";
+                }
+            })
+            .catch(error => {
+                mensaje.textContent = "Error al enviar la notificación.";
+            });
         } else {
             mensaje.textContent = "Código incorrecto";
         }
