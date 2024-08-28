@@ -36,5 +36,61 @@
             document.getElementById('center-text').style.display = 'block';
         }
     </script>
+    
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cuenta Atrás</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f0f0f0;
+        }
+        .countdown {
+            font-size: 2em;
+            text-align: center;
+            background: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+</head>
+<body>
+
+<div class="countdown" id="countdown">
+    <!-- Aquí se mostrará la cuenta atrás -->
+</div>
+
+<script>
+    // Fecha objetivo para la cuenta atrás
+    const targetDate = new Date("August 31, 2024 18:00:00").getTime();
+
+    // Actualiza la cuenta atrás cada segundo
+    const countdownFunction = setInterval(function() {
+        const now = new Date().getTime();
+        const distance = targetDate - now;
+
+        // Calcula los días, horas, minutos y segundos
+        const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+        const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+        // Muestra la cuenta atrás en el elemento con id "countdown"
+        document.getElementById("countdown").innerHTML = 
+            days + "d " + hours + "h " + minutes + "m " + seconds + "s ";
+
+        // Si la cuenta atrás ha terminado, muestra un mensaje
+        if (distance < 0) {
+            clearInterval(countdownFunction);
+            document.getElementById("countdown").innerHTML = "¡La cuenta atrás ha terminado!";
+        }
+    }, 1000);
+</script>
+    
 </body>
 </html>
